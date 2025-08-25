@@ -51,7 +51,7 @@ app.listen(port, () => {
 
 ### Localizações:
 
-De forma resumida, isso serve para definir locais diferentes. tipo www.com/usuarios.
+De forma resumida, isso serve para definir locais diferentes. tipo www.sitelegal.com/usuarios.
 
 ```javascript
 const usuarios = [
