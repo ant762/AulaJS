@@ -14,6 +14,7 @@ Destinado a aprendizagem de programador de sistemas do senai.
 - [Adição de conteúdo](#adição-de-conteúdo)
 - [Atualização de conteúdo](#atualização-de-conteúdo)
 - [Apagar conteúdo](#apagar-conteúdo)
+- [Mostrar dados JSON em um webiste a partir do CSS](#mostrar-dados-json-em-um-webiste-a-partir-do-css)
 
 ### Comandos
 
@@ -200,4 +201,120 @@ app.delete("/usuarios/delete/:id", (req, res) => {
 })
 ```
 
-# Por hoje, é isso - 06 / 08
+### Mostrar dados JSON em um webiste a partir do CSS
+
+Do mesmo jeito que sites mostram que você está logado, seus dados na página de perfil, etc.
+Você deve iniciar um servidor NODE.JS como mencionado anteriormente, e, posteriormente, utilizar a técnica abaixo no INDEX:
+
+```javascript
+fetch("http://localhost:3000/usuarios").then(async res=>{
+    if(!res.ok){
+        throw new Error("Erro na requisição")
+    }
+    return res.json();
+
+
+}).then(usuarios=>{
+    console.log(usuarios);
+    const listaUsuarios = document.getElementById("lista-usuarios");
+    console.log(listaUsuarios);
+})
+.catch(err=>{
+    console.error(err);
+});
+```
+
+Servidor JS:
+```javascript
+const express = require('express'); // Importa o Express
+const cors = require('cors'); // importa o cors lá
+
+const app = express(); //Cria o servidor
+
+const port = 3000; //Variavel para armazenar a porta
+
+//Para permitir receber json nas requisições
+app.use(express.json());
+app.use(cors());
+
+const usuarios = [
+    { "id": 1, "nome": "Otavio", "idade": 20, "senha": "123" },
+    { "id": 2, "nome": "Admin", "idade": 20, "senha": "1234" }
+]
+
+//request - requisição
+//response - respota
+app.get("/", (request, response) => {
+    response.send("Primeiro servidor DESI - Malwee");
+})
+
+//Buscar todos os usuários
+app.get("/usuarios", (req, res) => {
+    //send -> envia os dados
+    res.send(usuarios);
+})
+
+//Buscar um usuário -> get by id
+app.get("/usuarios/:id", (req, res) => {
+    //params - parametros da requisição (fica na url)
+    const id = parseInt(req.params.id);
+
+    const usuario = usuarios.find(usuario => usuario.id == id);
+
+    if (usuario != null) {
+        res.send(usuario)
+    } else {
+        res.status(404).send("Usuário não encontrado!")
+    }
+})
+
+//Criar um usuário
+app.post("/usuarios", (req, res) => {
+    //body - corpo da requisição
+    const novoUsuario = req.body;
+    novoUsuario.id = usuarios.length + 1;
+    usuarios.push(novoUsuario);
+
+    res.status(201).send(novoUsuario)
+})
+
+//Atualizar um usuário
+app.put("/usuarios/:id", (req, res) => {
+    const id = parseInt(req.params.id);
+    const novoUsuario = req.body;
+    novoUsuario.id = id;
+    const index = usuarios.findIndex(usuario => usuario.id == id);
+
+    if (index != null) {
+        usuarios[index] = novoUsuario;
+        res.status(204).send(novoUsuario);
+    } else {
+        res.status(404).send("Usuário não encontrado!")
+    }
+
+})
+
+//Deletar um usuário
+app.delete("/usuarios/:id", (req, res) => {
+    const id = parseInt(req.params.id);
+    const index = usuarios.findIndex(usuario => usuario.id == id);
+
+    if (index != null) {
+
+
+        
+        usuarios.splice(index, 1);
+        res.status(204).send("Usuário com id:" + id + " removido com sucesso!")
+    } else {
+        res.status(404).send("Usuário não encontrado!")
+    }
+})
+
+app.listen(port, () => {
+    console.log("Servidor rodando em http://localhost:3000");
+})
+```
+
+
+
+# Por hoje, é isso - 25 / 08
