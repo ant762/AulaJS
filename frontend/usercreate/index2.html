@@ -12,7 +12,7 @@
 
 <body class="container" id="bodyindex2">
     <h1 id="titulocadastro">Cadastrar Usuário</h1>
-    <form class="container" id="cadastrarUsuario">
+    <form class="container" id="cadastrarUsuario" onsubmit="cadastroUsuario(event)">
         <div class="mb-3">
             <label for="nome" class="form-label">Nome do Usuário</label>
             <input type="text" class="form-control" id="nome">
@@ -27,10 +27,10 @@
         </div>
         <div id="botoes">
             <a href="../index.html" class="btn btn-secondary">Voltar</a>
-            <button type="button" class="btn btn-primary">Cadastrar</button>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
         </div>
     </form>
-    <script src="/frontend/index.js"></script>
+    <script src="index2.js"></script>
 
 </body>
 

@@ -12,6 +12,7 @@ fetch("http://localhost:3000/usuarios").then(res => {
         listaUsuarios.innerHTML += `<li class="list-group-item">${usuario.nome}</li>`;
     });
 })
-    .catch(err => {
-        console.error(err);
-    });
+
+.catch(err => {
+    console.error(err);
+});

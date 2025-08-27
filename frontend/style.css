@@ -11,8 +11,13 @@
     justify-content: space-between;
 }
 
+#h1lista, #titulocadastro {
+    color: white;
+}
 
-
+body {
+    background: linear-gradient(90deg, #000000 0%, #ffffff 100%);
+}
 
 #bodyindex2 {
     display: grid;

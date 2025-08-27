@@ -15,6 +15,7 @@ Destinado a aprendizagem de programador de sistemas do senai.
 - [Atualização de conteúdo](#atualização-de-conteúdo)
 - [Apagar conteúdo](#apagar-conteúdo)
 - [Mostrar dados JSON em um webiste a partir do CSS](#mostrar-dados-json-em-um-webiste-a-partir-do-css)
+- [Pegar dados de um usuário para efetuar um cadastro](#pegar-dados-de-um-usuário-para-efetuar-um-cadastro)
 
 ### Comandos
 
@@ -315,6 +316,40 @@ app.listen(port, () => {
 })
 ```
 
+### Pegar dados de um usuário para efetuar um cadastro:
 
+```javascript
+function cadastroUsuario(event) {
+    event.preventDefault();
+    
+    let nome = event.target.nome.value;
+    let idade = event.target.idade.value;
+    let senha = document.getElementById("senha").value;
+    
+    fetch('http://localhost:3000/usuarios', {
+
+    method: 'POST',
+
+    headers: {
+
+        'Content-Type': 'application/json'
+
+    },
+
+    body: JSON.stringify({
+        "nome": nome,
+        "idade": idade,
+        "senha": senha
+    })
+
+})
+
+    .then(response => response.json())
+    .catch(error => console.log(error));
+
+
+};
+```
+O código irá pegar os dados a partir de um evento do html [onsubmit="cadastroUsuario(event)] assim conseguimos armazenar esses mesmos dados em um arquivo .JSON
 
 # Por hoje, é isso - 27 / 08
