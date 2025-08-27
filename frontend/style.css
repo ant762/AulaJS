@@ -6,6 +6,12 @@
     margin-top: 100px;
 }
 
+#botao2 {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
 #botoes {
     display: flex;
     justify-content: space-between;
