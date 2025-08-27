@@ -1,5 +1,21 @@
 
 
-#cadastrarUsuario {
-    margin-top: 100px
+#titulocadastro {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+#botoes {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+
+#index2 {
+    display: grid;
+    justify-content: center;
+    align-items: center;
 }
