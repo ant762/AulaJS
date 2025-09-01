@@ -6,6 +6,10 @@
     margin-top: 100px;
 }
 
+#cadastrarUsuario label {
+    color: white;
+}
+
 #botao2 {
     display: flex;
     justify-content: space-between;
