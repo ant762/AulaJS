@@ -16,6 +16,7 @@ Destinado a aprendizagem de programador de sistemas do senai.
 - [Apagar conteúdo](#apagar-conteúdo)
 - [Mostrar dados JSON em um webiste a partir do CSS](#mostrar-dados-json-em-um-webiste-a-partir-do-css)
 - [Pegar dados de um usuário para efetuar um cadastro](#pegar-dados-de-um-usuário-para-efetuar-um-cadastro)
+- [Atualizar Dados do Cadastro](#atualização-de-dados)
 
 ### Comandos
 
@@ -356,4 +357,59 @@ function cadastroUsuario(event) {
 ```
 O código irá pegar os dados a partir de um evento do html [onsubmit="cadastroUsuario(event)] assim conseguimos armazenar esses mesmos dados em um arquivo .JSON
 
-# Por hoje, é isso - 27 / 08
+### Atualização de Dados de Cadastro:
+
+O usuarioId é extraído da URL usando URLSearchParams, que busca o parâmetro id na query string. Após o carregamento completo da página (DOMContentLoaded), o código faz uma requisição GET para a URL para buscar os dados de um usuário (nome, idade e senha) com base no usuarioId. Se a requisição for bem-sucedida, os valores de nome, idade e senha são preenchidos automaticamente nos campos correspondentes da página. A função atualizarUsuario é chamada quando um evento (como um clique em um botão) ocorre. Ela envia uma requisição PUT para atualizar os dados do usuário na URL. A requisição envia um objeto JSON (a variável data, que parece não estar definida no código) com as alterações realizadas nos campos do formulário.
+
+```javascript
+const params = new URLSearchParams(window.location.search); // Pega os parâmetros da URL
+
+
+const usuarioId = params.get("id"); // Pega o valor do parâmetro "id"
+let nome = document.getElementById("nome"); // Pega o elemento do input nome
+let idade = document.getElementById("idade"); // Pega o elemento do input idade
+let senha = document.getElementById("senha"); // Pega o elemento do input senha
+
+document.addEventListener("DOMContentLoaded", () => { // Executa quando o DOM estiver carregado
+    !fetch(`http://localhost:3000/usuarios/${usuarioId}`) // Faz a requisição para o backend
+
+    
+        .then(response => response.json())
+
+        .then(data => { 
+            console.log(data)
+            nome.value = data.nome;
+            idade.value = data.idade;
+            senha.value = data.senha;
+        })
+
+        .catch(error => console.log(error));
+});
+
+function atualizarUsuario(event) { // Função para atualizar o usuário
+    event.preventDefault();
+
+    fetch(`http://localhost:3000/usuarios/${usuarioId}`, {
+    
+        method: 'PUT',
+    
+        headers: {
+    
+            'Content-Type': 'application/json'
+    
+        },
+    
+        body: JSON.stringify(data)
+    
+    })
+    
+        .then(response => response.json())
+    
+        .then(data => console.log(data))
+    
+        .catch(error => console.log(error));
+};
+```
+
+
+# Por hoje, é isso - 01 / 09
