@@ -10,8 +10,8 @@ app.use(express.json());
 app.use(cors());
 
 const usuarios = [
-    { "id": 1, "nome": "Otavio", "idade": 20, "senha": "123" },
-    { "id": 2, "nome": "Admin", "idade": 20, "senha": "1234" }
+    { "id": 1, "nome": "Otavio", "idade": 20, "senha": "123", "cep": "89010-000", "rua": "Rua das Palmeiras", "bairro": "Centro", "cidade": "Blumenau", "estado": "SC" },
+    { "id": 2, "nome": "Admin", "idade": 20, "senha": "1234", "cep": "89010-000", "rua": "Rua das Palmeiras", "bairro": "Centro", "cidade": "Blumenau", "estado": "SC" }
 ]
 
 let nextId = 3
@@ -19,7 +19,7 @@ let nextId = 3
 //request - requisição
 //response - respota
 app.get("/", (request, response) => {
-    response.send("Primeiro servidor DESI - Malwee");
+    response.send("Primeiro servidor com Express!");
 })
 
 //Buscar todos os usuários
@@ -61,7 +61,7 @@ app.put("/usuarios/:id", (req, res) => {
 
     if (index != null) {
         usuarios[index] = novoUsuario;
-        res.status(204).send(novoUsuario);
+        res.status(200).send(novoUsuario);
     } else {
         res.status(404).send("Usuário não encontrado!")
     }

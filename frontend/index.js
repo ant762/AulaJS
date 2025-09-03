@@ -12,8 +12,12 @@ fetch("http://localhost:3000/usuarios").then(res => {
         listaUsuarios.innerHTML += `
         <li class="list-group-item">
         <div class = "d-flex justify-content-between">
-            <h5>Nome: ${usuario.nome} - Idade: ${usuario.idade}</h5>
-            <a href="useredit/index3.html?id=${usuario.id}" class="btn btn-primary">Atualizar</button>
+            <h5>${usuario.nome}, ${usuario.idade} anos - ${usuario.cidade}, ${usuario.estado}</h5>
+
+            <div>
+                <a href="useredit/index3.html?id=${usuario.id}" class="btn btn-primary">Atualizar</a>
+                <button type="button" class="btn btn-danger" onclick="deletarUsuario(${usuario.id})">Deletar</button>
+            <div>
         <div>
         </li>`;
 
@@ -23,3 +27,22 @@ fetch("http://localhost:3000/usuarios").then(res => {
     .catch(err => {
         console.error(err);
     });
+
+function deletarUsuario(userId) {
+    let confirmar = confirm("Você realmente deseja excluir o usuário: " + userId + "?");
+    if (confirmar ) {
+        fetch(`http://localhost:3000/usuarios/${userId}`, {
+            method: 'DELETE',
+        })
+            .then(response => {
+                if(response.ok = true){
+                    alert("Usuário " + userId + " excluído com sucesso!");
+                    window.location.reload();
+                }
+            })
+
+            .catch(error => {
+                alert("Erro ao excluír o usuário: " + userId);
+            })
+    }
+}

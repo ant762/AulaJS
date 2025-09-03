@@ -26,8 +26,33 @@
             <input type="password" class="form-control" id="senha">
         </div>
         <div id="botoes">
+        </div>
+        <h2 id="titulocadastro" class="mt-4 mb-3">Endereço</h2>
+        <div class="mb-3">
+            <label for="cep" class="form-label">CEP</label>
+            <input type="text" class="form-control" id="cep" pattern="\d{5}-?\d{3}" required>
+            <small class="form-text text-muted">Formato: 00000-000</small>
+        </div>
+        <div class="mb-3">
+            <label for="rua" class="form-label">Rua</label>
+            <input type="text" class="form-control" id="rua">
+        </div>
+        <div class="mb-3">
+            <label for="bairro" class="form-label">Bairro</label>
+            <input type="text" class="form-control" id="bairro">
+        </div>
+        <div class="mb-3">
+            <label for="cidade" class="form-label">Cidade</label>
+            <input type="text" class="form-control" id="cidade">
+        </div>
+        <div class="mb-3">
+            <label for="estado" class="form-label">Estado</label>
+            <input type="text" class="form-control" id="estado">
+        </div>
+        
+        <div id="botoes">
             <a href="../index.html" class="btn btn-secondary">Voltar</a>
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <button type="submit" class="btn btn-primary">Atualizar</button>
         </div>
     </form>
     <script src="index3.js"></script>
